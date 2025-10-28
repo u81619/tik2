@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>انتخابات 4GAMER</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f9f9f9; text-align: center; }
+  h1 { color: #333; }
+  .candidate { margin: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; background: #fff; display: inline-block; width: 200px; }
+  button { padding: 5px 10px; margin-top: 5px; cursor: pointer; }
+  .votes { font-weight: bold; color: #007BFF; }
+</style>
+</head>
+<body>
+
+<h1>انتخابات 4GAMER</h1>
+<div id="candidates"></div>
+
+<script>
+const candidateNames = [
+  "حيدر سامي",
+  "ذو الفقار عقيل",
+  "ذو الفقار علي",
+  "تيم منتظر",
+  "ابو الفضل",
+  "حسين ثائر",
+  "حيدر احمد",
+  "اوس نزار",
+  "ايمن انمار",
+  "اوس حسام"
+];
+
+// استدعاء التصويتات من LocalStorage أو تعيين صفر لكل مرشح
+let votes = JSON.parse(localStorage.getItem('votes')) || {};
+candidateNames.forEach(name => { if(!votes[name]) votes[name] = 0; });
+
+function renderCandidates() {
+  const container = document.getElementById('candidates');
+  container.innerHTML = '';
+  candidateNames.forEach(name => {
+    const div = document.createElement('div');
+    div.className = 'candidate';
+    div.innerHTML = `
+      <div>${name}</div>
+      <div class="votes">عدد الأصوات: ${votes[name]}</div>
+      <button onclick="vote('${name}')">صوت</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function vote(name) {
+  votes[name]++;
+  localStorage.setItem('votes', JSON.stringify(votes));
+  renderCandidates();
+}
+
+// تحديث أول بأول كل ثانية (لو فتحوا أكثر من تبويب)
+setInterval(() => {
+  votes = JSON.parse(localStorage.getItem('votes')) || votes;
+  renderCandidates();
+}, 1000);
+
+renderCandidates();
+</script>
+
+</body>
+</html>
