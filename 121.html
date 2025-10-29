@@ -1,69 +1,117 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>انتخابات 4GAMER</title>
-<style>
-  body { font-family: Arial, sans-serif; background: #f9f9f9; text-align: center; }
-  h1 { color: #333; }
-  .candidate { margin: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; background: #fff; display: inline-block; width: 200px; }
-  button { padding: 5px 10px; margin-top: 5px; cursor: pointer; }
-  .votes { font-weight: bold; color: #007BFF; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خبرمهم</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-size: 1.1rem;
+            padding: 0 20px;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #1d1d1d;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            position: relative;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 6px;
+            background: linear-gradient(135deg, #ff007f, #00bfff);
+            border-radius: 50px;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #f8f8f8;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #bbb;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .twitter-tweet {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .button {
+            display: inline-block;
+            background: linear-gradient(145deg, #ff007f, #00bfff);
+            padding: 10px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.6);
+        }
+
+        .button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(0, 191, 255, 0.3);
+        }
+
+    </style>
 </head>
 <body>
 
-<h1>انتخابات 4GAMER</h1>
-<div id="candidates"></div>
+    <div class="container">
+        <h1>تحديث أسطوري!</h1>
+  
+        <!-- تغريدة تويتر -->
+        <blockquote class="twitter-tweet">
+            <p lang="ar" dir="rtl">
+                🚨🚨🚨🚨 عااااجل - رسميًا:<br><br>ابتداءً من 2026، ون بيس سيصبح انمي موسمي حيث سيعرض سنويًا 26 حلقة فقط 😨! 
+                <a href="https://t.co/380q5fnp6l">pic.twitter.com/380q5fnp6l</a>
+            </p>&mdash; ANIME SHOT (@ASCom0) 
+            <a href="https://twitter.com/ASCom0/status/1983156873579905140?ref_src=twsrc%5Etfw">October 28, 2025</a>
+        </blockquote>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-<script>
-const candidateNames = [
-  "حيدر سامي",
-  "ذو الفقار عقيل",
-  "ذو الفقار علي",
-  "تيم منتظر",
-  "ابو الفضل",
-  "حسين ثائر",
-  "حيدر احمد",
-  "اوس نزار",
-  "ايمن انمار",
-  "اوس حسام"
-];
-
-// استدعاء التصويتات من LocalStorage أو تعيين صفر لكل مرشح
-let votes = JSON.parse(localStorage.getItem('votes')) || {};
-candidateNames.forEach(name => { if(!votes[name]) votes[name] = 0; });
-
-function renderCandidates() {
-  const container = document.getElementById('candidates');
-  container.innerHTML = '';
-  candidateNames.forEach(name => {
-    const div = document.createElement('div');
-    div.className = 'candidate';
-    div.innerHTML = `
-      <div>${name}</div>
-      <div class="votes">عدد الأصوات: ${votes[name]}</div>
-      <button onclick="vote('${name}')">صوت</button>
-    `;
-    container.appendChild(div);
-  });
-}
-
-function vote(name) {
-  votes[name]++;
-  localStorage.setItem('votes', JSON.stringify(votes));
-  renderCandidates();
-}
-
-// تحديث أول بأول كل ثانية (لو فتحوا أكثر من تبويب)
-setInterval(() => {
-  votes = JSON.parse(localStorage.getItem('votes')) || votes;
-  renderCandidates();
-}, 1000);
-
-renderCandidates();
-</script>
+        <!-- زر تفاعلي -->
+        <a href="#" class="button">تابع المزيد من التحديثات</a>
+    </div>
 
 </body>
 </html>
